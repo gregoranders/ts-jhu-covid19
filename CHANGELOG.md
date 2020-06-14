@@ -1,3 +1,14 @@
+#### 0.0.6 (2020-06-14)
+
+##### Build System / Dependencies
+
+* **dependencies:**  update @gregoranders/csv ([d5123a07](https://github.com/gregoranders/ts-jhu-covid19/commit/d5123a078f6af1254b8d8db0b4bf0e2b29a6de40))
+
+##### Documentation Changes
+
+* **SECURITY:**  update ([73e07001](https://github.com/gregoranders/ts-jhu-covid19/commit/73e0700146f0fc3fb3061eaf7f37791d0ea2e732))
+* **live:**  add jekyll config ([697c48ca](https://github.com/gregoranders/ts-jhu-covid19/commit/697c48cacc4ad5693b638e0746c16f4d0bfa828c))
+
 #### 0.0.5 (2020-06-14)
 
 ##### Chores
