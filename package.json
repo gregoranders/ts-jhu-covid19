@@ -1,6 +1,6 @@
 {
   "name": "@gregoranders/jhu-covid19",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Provides access to the data published at the COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University",
   "scripts": {
     "clear": "npm run prescript && npm run pretest && rimraf ./node_modules ./package-lock.json ./temp",
