@@ -125,7 +125,7 @@ npm run clear
 [node-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
 [node-image]: https://img.shields.io/node/v/gregoranders/ts-jhu-covid19
 [npm-types-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
-[npm-types-image]: https://img.shields.io/npm/types/gregoranders/ts-jhu-covid19
+[npm-types-image]: https://img.shields.io/npm/types/@gregoranders/ts-jhu-covid19
 [tag-url]: https://github.com/gregoranders/ts-jhu-covid19
 [tag-image]: https://img.shields.io/github/tag/gregoranders/ts-jhu-covid19
 [release-url]: https://github.com/gregoranders/ts-jhu-covid19
