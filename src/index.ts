@@ -29,7 +29,7 @@ export const libversion = '0.0.3';
  * @public
  * @readonly
  */
-export const liburl = 'https://gregoranders.github.io/jhu-covid19/';
+export const liburl = 'https://gregoranders.github.io/ts-jhu-covid19/';
 
 /**
  * @public
