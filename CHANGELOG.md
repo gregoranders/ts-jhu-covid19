@@ -1,3 +1,18 @@
+#### 0.0.2 (2020-06-14)
+
+##### Chores
+
+* **release:**  prepare next release ([a87742e0](https://github.com/gregoranders/ts-jhu-covid19/commit/a87742e08356056c5b3f18671397d6123cfeec06))
+
+##### Bug Fixes
+
+* **docs:**  fix types badge ([a04eb9a6](https://github.com/gregoranders/ts-jhu-covid19/commit/a04eb9a629b17a9e742b6d3e844de8d3d0b897bd))
+* **build:**  update code climate action ([621522d4](https://github.com/gregoranders/ts-jhu-covid19/commit/621522d4aa35766c7b8704aa298fe2d8830f5f79))
+
+##### Other Changes
+
+* **README:**  add npm badges ([bbeb9d6f](https://github.com/gregoranders/ts-jhu-covid19/commit/bbeb9d6f141e43d2f26d2e01fde0a018efeacfd8))
+
 #### 0.0.1 (2020-06-14)
 
 ##### Chores
