@@ -3,7 +3,7 @@ import * as TestSubject from './index';
 describe(`${TestSubject.libname} ${TestSubject.libversion}`, () => {
   describe('exports', () => {
     it('libname', () => {
-      expect(TestSubject.libname).toBe('jhu-covid19');
+      expect(TestSubject.libname).toBe('@gregoranders/jhu-covid19');
     });
 
     it('libversion', () => {
