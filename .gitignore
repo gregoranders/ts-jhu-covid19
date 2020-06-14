@@ -3,6 +3,7 @@ node_modules/
 temp/
 test/
 docs-tmp/
+typedoc/
 
 package-lock.json
 junit.xml

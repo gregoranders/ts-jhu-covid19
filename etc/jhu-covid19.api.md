@@ -5,10 +5,10 @@
 ```ts
 
 // @public
-export const libname = "jhu-covid19";
+export const libname = "@gregoranders/jhu-covid19";
 
 // @public
-export const liburl = "https://gregoranders.github.io/jhu-covid19/";
+export const liburl = "https://gregoranders.github.io/ts-jhu-covid19/";
 
 // @public
 export const libversion = "0.0.3";

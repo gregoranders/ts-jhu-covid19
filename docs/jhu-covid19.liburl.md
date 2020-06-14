@@ -9,5 +9,5 @@ library homepage
 <b>Signature:</b>
 
 ```typescript
-liburl = "https://gregoranders.github.io/jhu-covid19/"
+liburl = "https://gregoranders.github.io/ts-jhu-covid19/"
 ```

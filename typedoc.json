@@ -1,0 +1,6 @@
+{
+  "inputFiles": ["./src/index.ts"],
+  "mode": "modules",
+  "out": "typedoc",
+  "toc": "index"
+}
