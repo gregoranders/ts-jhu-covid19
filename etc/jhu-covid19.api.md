@@ -11,7 +11,7 @@ export const libname = "@gregoranders/jhu-covid19";
 export const liburl = "https://gregoranders.github.io/ts-jhu-covid19/";
 
 // @public
-export const libversion = "0.0.4";
+export const libversion = "0.0.5";
 
 // @public
 export interface Metric extends MetricValue {
