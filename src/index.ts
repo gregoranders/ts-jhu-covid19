@@ -21,7 +21,7 @@ export const libname = 'jhu-covid19';
  * @public
  * @readonly
  */
-export const libversion = '0.0.2';
+export const libversion = '0.0.3';
 
 /**
  * library homepage
@@ -34,7 +34,15 @@ export const liburl = 'https://gregoranders.github.io/jhu-covid19/';
 /**
  * @public
  */
-export { Metric, MetricValue, MetricValueAvrg, MetricValueAvrgType, MetricValueType, Model, Provider } from './provider';
+export {
+  Metric,
+  MetricValue,
+  MetricValueAvrg,
+  MetricValueAvrgType,
+  MetricValueType,
+  Model,
+  Provider,
+} from './provider';
 
 /**
  * @public

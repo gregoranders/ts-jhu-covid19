@@ -32,7 +32,7 @@
 ## Example
 
 ```sh
-npm install --save-dev @gregoranders/csv
+npm install --save-dev @gregoranders/jhu-covid19
 ```
 
 ```ts
