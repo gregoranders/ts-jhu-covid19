@@ -1,3 +1,9 @@
+#### 0.0.3 (2020-06-14)
+
+##### Bug Fixes
+
+* **README:**  fix install example ([94dd3a7f](https://github.com/gregoranders/ts-jhu-covid19/commit/94dd3a7fb8ce163757439710a4894f812b3257ad))
+
 #### 0.0.2 (2020-06-14)
 
 ##### Chores
