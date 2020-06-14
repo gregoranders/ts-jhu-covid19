@@ -2,5 +2,6 @@
   "inputFiles": ["./src/index.ts"],
   "mode": "modules",
   "out": "typedoc",
-  "toc": "index"
+  "toc": "index",
+  "gitRevision": "master"
 }
