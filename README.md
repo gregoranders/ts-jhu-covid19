@@ -7,7 +7,6 @@
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
 [![Issues][issues-image]][issues-url]
-
 [![Code maintainability][code-maintainability-image]][code-maintainability-url] [![Code issues][code-issues-image]][code-issues-url] [![Code Technical Debt][code-tech-debt-image]][code-tech-debt-url]
 
 [![Main Language](https://img.shields.io/github/languages/top/gregoranders/ts-jhu-covid19)][code-metric-url] [![Languages](https://img.shields.io/github/languages/count/gregoranders/ts-jhu-covid19)][code-metric-url] [![Code Size](https://img.shields.io/github/languages/code-size/gregoranders/ts-jhu-covid19)][code-metric-url] [![Repo-Size](https://img.shields.io/github/repo-size/gregoranders/ts-jhu-covid19)][code-metric-url]
