@@ -1,3 +1,17 @@
+#### 0.0.5 (2020-06-14)
+
+##### Chores
+
+* **release:**  prepare next release ([8947c671](https://github.com/gregoranders/ts-jhu-covid19/commit/8947c671bf1ac5f92d89d331c71a7ebc7ef59ef9))
+
+##### Documentation Changes
+
+* **typedoc:**  remove typedoc ([1be21ca7](https://github.com/gregoranders/ts-jhu-covid19/commit/1be21ca7abee81ec257d002b05189fc8def5e048))
+
+##### Bug Fixes
+
+* **docs:**  fix badges ([2cc8db1a](https://github.com/gregoranders/ts-jhu-covid19/commit/2cc8db1a4c21d49312ea3eb33fb16cab3217812a))
+
 #### 0.0.4 (2020-06-14)
 
 ##### Chores
