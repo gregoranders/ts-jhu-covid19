@@ -13,7 +13,7 @@ import { default as Provider } from './provider';
  * @public
  * @readonly
  */
-export const libname = 'jhu-covid19';
+export const libname = '@gregoranders/jhu-covid19';
 
 /**
  * library version
@@ -21,7 +21,7 @@ export const libname = 'jhu-covid19';
  * @public
  * @readonly
  */
-export const libversion = '0.0.3';
+export const libversion = '0.0.4';
 
 /**
  * library homepage
@@ -29,7 +29,7 @@ export const libversion = '0.0.3';
  * @public
  * @readonly
  */
-export const liburl = 'https://gregoranders.github.io/jhu-covid19/';
+export const liburl = 'https://gregoranders.github.io/ts-jhu-covid19/';
 
 /**
  * @public

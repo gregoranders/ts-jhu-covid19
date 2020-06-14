@@ -12,9 +12,11 @@
     "script": "npm run script:cjs && npm run script:esm",
     "script:cjs": "tsc --project ./ --module commonjs --target es5 --outDir ./dist/cjs",
     "script:esm": "tsc --project ./ --module es6 --declaration --declarationDir ./dist/esm --outDir ./dist/esm",
-    "prepare": "npm test && npm run build && npm run api-extractor && npm run api-documenter && eslint --ext .ts ./src",
+    "prepare": "npm test && npm run build && npm run api-extractor && npm run api-documenter && npm run typedoc && eslint --ext .ts ./src",
     "api-extractor": "api-extractor run --local --verbose",
     "api-documenter": "api-documenter markdown --input ./dist --output ./docs-tmp && cpx 'docs-tmp/**/*.*' docs",
+    "pretypedoc": "rimraf ./typedoc",
+    "typedoc": "typedoc && cpx 'typedoc/**/*.*' docs",
     "codeclimate": "docker run --interactive --tty --rm --env CODECLIMATE_CODE=\"$PWD\" --volume \"$PWD\":/code --volume /var/run/docker.sock:/var/run/docker.sock --volume /tmp/cc:/tmp/cc codeclimate/codeclimate analyze",
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'chore(changelog): CHANGELOG.md' && npm version major -m \"chore(release): %s \"",
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'chore(changelog): CHANGELOG.md' && npm version minor -m \"chore(release): %s \"",
@@ -143,6 +145,7 @@
     "rimraf": "3.0.2",
     "ts-jest": "26.1.0",
     "ts-node": "8.10.2",
+    "typedoc": "0.17.7",
     "typescript": "3.9.5"
   }
 }

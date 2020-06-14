@@ -9,5 +9,5 @@ library name
 <b>Signature:</b>
 
 ```typescript
-libname = "jhu-covid19"
+libname = "@gregoranders/jhu-covid19"
 ```
