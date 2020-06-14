@@ -9,11 +9,8 @@
 [![Issues][issues-image]][issues-url]
 [![Code maintainability][code-maintainability-image]][code-maintainability-url] [![Code issues][code-issues-image]][code-issues-url] [![Code Technical Debt][code-tech-debt-image]][code-tech-debt-url]
 
-[![npm][npm-image]][npm-url]
-[![node][node-image]][node-url]
 [![types][npm-types-image]][npm-types-url]
-[![Release][release-image]][release-url]
-[![Tag][tag-image]][tag-url]
+[![node][node-image]][node-url]
 
 [![Main Language](https://img.shields.io/github/languages/top/gregoranders/ts-jhu-covid19)][code-metric-url] [![Languages](https://img.shields.io/github/languages/count/gregoranders/ts-jhu-covid19)][code-metric-url] [![Code Size](https://img.shields.io/github/languages/code-size/gregoranders/ts-jhu-covid19)][code-metric-url] [![Repo-Size](https://img.shields.io/github/repo-size/gregoranders/ts-jhu-covid19)][code-metric-url]
 
@@ -26,6 +23,7 @@
 
 |                                                                  |                                                                            |                                                                              |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [![Release][release-image]][release-url]                         |                                                                            | [![npm][npm-image]][npm-url]                                                 |
 | [![Master Build][master-build-image]][master-url]                | [![Master Coverage][master-coveralls-image]][master-coveralls-url]         | [![Master Version][master-version-image]][master-version-url]                |
 | [![Development Build][development-build-image]][development-url] | [![Test Coverage][development-coveralls-image]][development-coveralls-url] | [![Development Version][development-version-image]][development-version-url] |
 
@@ -121,12 +119,10 @@ npm run clear
 [development-circleci-image]: https://circleci.com/gh/gregoranders/ts-jhu-covid19/tree/development.svg?style=shield
 [development-circleci-url]: https://app.circleci.com/pipelines/github/gregoranders/ts-jhu-covid19?branch=development
 [npm-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
-[npm-image]: https://img.shields.io/npm/v/gregoranders/ts-jhu-covid19
+[npm-image]: https://img.shields.io/npm/v/@gregoranders/jhu-covid19
 [node-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
-[node-image]: https://img.shields.io/node/v/gregoranders/ts-jhu-covid19
+[node-image]: https://img.shields.io/node/v/@gregoranders/jhu-covid19
 [npm-types-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
-[npm-types-image]: https://img.shields.io/npm/types/@gregoranders/ts-jhu-covid19
-[tag-url]: https://github.com/gregoranders/ts-jhu-covid19
-[tag-image]: https://img.shields.io/github/tag/gregoranders/ts-jhu-covid19
-[release-url]: https://github.com/gregoranders/ts-jhu-covid19
+[npm-types-image]: https://img.shields.io/npm/types/@gregoranders/jhu-covid19
+[release-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
 [release-image]: https://img.shields.io/github/release/gregoranders/ts-jhu-covid19
