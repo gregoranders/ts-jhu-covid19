@@ -1,3 +1,20 @@
+#### 0.0.4 (2020-06-14)
+
+##### Chores
+
+* **release:**  prepare next release ([2c6f21fb](https://github.com/gregoranders/ts-jhu-covid19/commit/2c6f21fb4e7d938d6564179eed788b2bb0c1fee9))
+
+##### Bug Fixes
+
+* **typedoc:**  pin down to master ([c72bc731](https://github.com/gregoranders/ts-jhu-covid19/commit/c72bc731b8a45fb79c432cf2e6d37fe56836c8a3))
+* **liburl:**
+  *  add typedoc ([e366cd14](https://github.com/gregoranders/ts-jhu-covid19/commit/e366cd1493df2b69df6da9038e564e7f0aaccfee))
+  *  fix exported liburl ([a438d034](https://github.com/gregoranders/ts-jhu-covid19/commit/a438d0341502c9cee4ce299ab3d7d608470f5c0b))
+
+##### Refactors
+
+* **libname:**  rename libname ([c8690543](https://github.com/gregoranders/ts-jhu-covid19/commit/c869054320a272a675d0beb8d303365a8bc37673))
+
 #### 0.0.3 (2020-06-14)
 
 ##### Bug Fixes
