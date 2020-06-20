@@ -4,5 +4,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "files.associations": { "*.json": "jsonc" }
+  "files.associations": { "api-extractor.json": "jsonc" }
 }
