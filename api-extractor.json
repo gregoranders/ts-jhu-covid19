@@ -18,7 +18,8 @@
   },
 
   "apiReport": {
-    "enabled": true
+    "enabled": true,
+    "reportFolder": "<projectFolder>/docs"
   },
 
   "docModel": {
@@ -33,7 +34,7 @@
   },
 
   "tsdocMetadata": {
-    "enabled": true,
+    "enabled": false,
     "tsdocMetadataFilePath": "<projectFolder>/dist/tsdoc-metadata.json"
   },
 

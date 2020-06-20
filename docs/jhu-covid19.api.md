@@ -5,13 +5,27 @@
 ```ts
 
 // @public
+export type FetchLike = (url: string, options?: FetchLikeOptions) => Promise<FetchLikeResult>;
+
+// @public
+export type FetchLikeOptions = {
+    headers: Record<string, string>;
+    method: 'GET';
+};
+
+// @public
+export type FetchLikeResult = {
+    text(): Promise<string>;
+};
+
+// @public
 export const libname = "@gregoranders/jhu-covid19";
 
 // @public
 export const liburl = "https://gregoranders.github.io/ts-jhu-covid19/";
 
 // @public
-export const libversion = "0.0.6";
+export const libversion = "0.0.7";
 
 // @public
 export interface Metric extends MetricValue {
@@ -57,6 +71,7 @@ export interface Model {
 
 // @public
 class Provider {
+    constructor(_fetch: FetchLike);
     get(): Promise<Model[]>;
 }
 

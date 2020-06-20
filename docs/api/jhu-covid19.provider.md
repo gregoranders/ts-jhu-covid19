@@ -20,6 +20,7 @@ provides access to the data hosted at [https://github.com/CSSEGISandData/COVID-1
 
 
 ```ts
+import fetch from 'node-fetch';
 import Provider from '@gregoranders/jhu-covid19';
 
 const main = async () => {
@@ -32,6 +33,12 @@ const main = async () => {
 main();
 
 ```
+
+## Constructors
+
+|  Constructor | Modifiers | Description |
+|  --- | --- | --- |
+|  [(constructor)(\_fetch)](./jhu-covid19.provider._constructor_.md) |  | constructor |
 
 ## Methods
 

@@ -4,20 +4,7 @@
       "path": "../"
     }
   ],
-  "settings": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    },
-    "eslint.validate": ["javascript", "typescript"],
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "files.associations": {
-      "*.json": "jsonc"
-    },
-    "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
-  },
+  "settings": {},
   "extensions": {
     "recommendations": [
       "coenraads.bracket-pair-colorizer",

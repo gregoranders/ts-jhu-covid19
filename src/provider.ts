@@ -1,5 +1,13 @@
-import { ModelCollector, RowModel, RowModelValue } from './collector';
+import {
+  FetchLike,
+  FetchLikeOptions,
+  FetchLikeResult,
+  ModelCollector,
+  RowModel,
+  RowModelValue,
+} from './collector';
 
+export { FetchLike, FetchLikeOptions, FetchLikeResult };
 
 /**
  * metric value type
@@ -70,7 +78,7 @@ export interface MetricValue extends Record<MetricValueType, number> {
    * @readonly
    */
   active: number;
-};
+}
 
 /**
  * precalculated average type - in days
@@ -110,7 +118,8 @@ export type MetricValueAvrgType = 5 | 7 | 14 | 21 | 28;
  * @public
  * @readonly
  */
-export interface MetricValueAvrg extends Record<MetricValueAvrgType, MetricValue> {
+export interface MetricValueAvrg
+  extends Record<MetricValueAvrgType, MetricValue> {
   /**
    * 5 days average
    *
@@ -254,7 +263,7 @@ export class ModelProcessor {
 
   public constructor(model: readonly RowModel[]) {
     if (model && model.length) {
-      this._model = this.process(model);
+      this._model = this._process(model);
     }
   }
 
@@ -262,7 +271,7 @@ export class ModelProcessor {
     return this._model;
   }
 
-  private process(models: readonly RowModel[]) {
+  private _process(models: readonly RowModel[]) {
     return models.map((model) => {
       const factor = model.population ? model.population / 100000 : 1;
       const mapped = {
@@ -274,109 +283,119 @@ export class ModelProcessor {
         mapped.state = model.state;
       }
 
-      mapped.metrics = this.metrics(model, factor);
+      mapped.metrics = this._metrics(model, factor);
 
       return mapped;
     });
   }
 
-  private metrics(model: RowModel, factor: number) {
+  private _metrics(model: RowModel, factor: number) {
     return model.values.map((value, index, all) => {
-      const avrg = this.averages(all, index);
-      const diff = this.diff(value, index, all);
+      const avrg = this._averages(all, index);
+      const diff = this._diff(value, index, all);
       const base = {
         confirmed: value.confirmed,
         dead: value.deaths,
         recovered: value.recovered,
-        active: this.active(value),
+        active: this._active(value),
       };
       return {
         ...base,
         diff,
         avrg,
         ratio: {
-          ...this.ratio(base, factor),
-          diff: this.ratio(diff, factor),
-          avrg: this.averagesRatio(avrg, factor),
+          ...this._ratio(base, factor),
+          diff: this._ratio(diff, factor),
+          avrg: this._averagesRatio(avrg, factor),
         },
         timestamp: value.timestamp,
       } as Metric;
     });
   }
 
-  private diff(value: RowModelValue, index: number, all: RowModelValue[]): MetricValue {
+  private _diff(
+    value: RowModelValue,
+    index: number,
+    all: RowModelValue[],
+  ): MetricValue {
     if (!index) {
-      return DEFAULT_METRIC_VALUE;
+      return { ...DEFAULT_METRIC_VALUE };
     } else {
       return {
         confirmed: value.confirmed - all[index - 1].confirmed,
         dead: value.deaths - all[index - 1].deaths,
         recovered: value.recovered - all[index - 1].recovered,
-        active: this.active(value) - this.active(all[index - 1]),
+        active: this._active(value) - this._active(all[index - 1]),
       };
     }
   }
 
-  private averages(values: RowModelValue[], index: number): MetricValueAvrg {
+  private _averages(values: RowModelValue[], index: number): MetricValueAvrg {
     return {
-      5: this.avrg(5, index, values),
-      7: this.avrg(7, index, values),
-      14: this.avrg(14, index, values),
-      21: this.avrg(21, index, values),
-      28: this.avrg(28, index, values),
+      5: this._avrg(5, index, values),
+      7: this._avrg(7, index, values),
+      14: this._avrg(14, index, values),
+      21: this._avrg(21, index, values),
+      28: this._avrg(28, index, values),
     };
   }
 
-  private averagesRatio(values: MetricValueAvrg, factor: number): MetricValueAvrg {
+  private _averagesRatio(
+    values: MetricValueAvrg,
+    factor: number,
+  ): MetricValueAvrg {
     return {
-      5: this.ratio(values[5], factor),
-      7: this.ratio(values[7], factor),
-      14: this.ratio(values[14], factor),
-      21: this.ratio(values[21], factor),
-      28: this.ratio(values[28], factor),
+      5: this._ratio(values[5], factor),
+      7: this._ratio(values[7], factor),
+      14: this._ratio(values[14], factor),
+      21: this._ratio(values[21], factor),
+      28: this._ratio(values[28], factor),
     };
   }
 
-  private avrg(back: number, index: number, all: RowModelValue[]): MetricValue {
-    let sum = DEFAULT_METRIC_VALUE;
+  private _avrg(
+    back: number,
+    index: number,
+    all: RowModelValue[],
+  ): MetricValue {
+    const sum = { ...DEFAULT_METRIC_VALUE };
 
-    if (!index) {
+    if (index === 0) {
       sum.confirmed = all[index].confirmed;
       sum.dead = all[index].deaths;
       sum.recovered = all[index].recovered;
-      sum.active = this.active(all[index]);
-      return sum;
+      sum.active = this._active(all[index]);
+    } else {
+      for (let idx = index; idx > index - back && idx > 0; idx--) {
+        const diff = this._diff(all[idx], idx, all);
+        sum.confirmed += diff.confirmed;
+        sum.dead += diff.dead;
+        sum.recovered += diff.recovered;
+        sum.active += diff.active;
+      }
     }
 
-    let iter = 0;
-    for (let idx = index; idx > index - back && idx > 0; idx--) {
-      const diff = this.diff(all[idx], idx, all);
-      sum.confirmed += diff.confirmed;
-      sum.dead += diff.dead;
-      sum.recovered += diff.recovered;
-      sum.active += diff.active;
-      iter++;
-    }
-
-    /* istanbul ignore next */
-    if (iter) {
-      sum = this.ratio(sum, iter);
-    }
-
-    return sum;
+    return this._ratio(sum, back);
   }
 
-  private active(value: RowModelValue) {
+  private _active(value: RowModelValue) {
     return value.confirmed - value.deaths - value.recovered;
   }
 
-  private ratio(value: MetricValue, factor: number): MetricValue {
+  private _ratio(value: MetricValue, factor: number): MetricValue {
     return {
-      confirmed: value.confirmed / factor,
-      dead: value.dead / factor,
-      recovered: value.recovered / factor,
-      active: value.active / factor,
+      confirmed: this._safeDiv(value.confirmed, factor),
+      dead: this._safeDiv(value.dead, factor),
+      recovered: this._safeDiv(value.recovered, factor),
+      active: this._safeDiv(value.active, factor),
     };
+  }
+
+  private _safeDiv(value: number, factor: number) {
+    if (value === 0) {
+      return 0;
+    }
+    return value / factor;
   }
 }
 
@@ -388,6 +407,7 @@ export class ModelProcessor {
  *
  * @example
  * ```ts
+ * import fetch from 'node-fetch';
  * import Provider from '@gregoranders/jhu-covid19';
  *
  * const main = async () => {
@@ -404,6 +424,22 @@ export class ModelProcessor {
  */
 export class Provider {
   /**
+   * constructor
+   *
+   * @param _fetch - `fetch` like interface implementation
+   *
+   * @example
+   * ```ts
+   *   import fetch from 'node-fetch';
+   *
+   *   const provider = new Provider(fetch);
+   * ```
+   *
+   * @public
+   */
+  public constructor(private _fetch: FetchLike) {}
+
+  /**
    * Fetches the JHU datset, aggregates, precalculates values, diffs and averages.
    *
    * @remarks
@@ -415,7 +451,7 @@ export class Provider {
    * @readonly
    */
   public async get(): Promise<Model[]> {
-    const collector = new ModelCollector();
+    const collector = new ModelCollector(this._fetch);
     const model = await collector.collect();
     const processor = new ModelProcessor(model);
     return Promise.resolve(processor.model);

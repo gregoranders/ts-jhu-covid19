@@ -12,14 +12,7 @@ plugins:
     enabled: true
     channel: 'eslint-6'
     config:
-      config: .cceslintrc.js
-    extensions:
-      - .es6
-      - .js
-      - .jsx
-      - .ts
-      - .tsx
-      - .mjs
+      config: .eslintrc-cc.json
   fixme:
     enabled: true
   git-legal:

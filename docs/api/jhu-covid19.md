@@ -35,6 +35,9 @@ https://github.com/CSSEGISandData/COVID-19
 
 |  Type Alias | Description |
 |  --- | --- |
+|  [FetchLike](./jhu-covid19.fetchlike.md) | fetch like interface |
+|  [FetchLikeOptions](./jhu-covid19.fetchlikeoptions.md) | fetch like interface options |
+|  [FetchLikeResult](./jhu-covid19.fetchlikeresult.md) | fetch like interface result |
 |  [MetricValueAvrgType](./jhu-covid19.metricvalueavrgtype.md) | precalculated average type - in days |
 |  [MetricValueType](./jhu-covid19.metricvaluetype.md) | metric value type |
 
