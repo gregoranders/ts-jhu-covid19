@@ -75,7 +75,6 @@
     "outputDirectory": "./test"
   },
   "jest": {
-    "collectCoverage": true,
     "collectCoverageFrom": [
       "!**/node_modules/**",
       "!**/dist/**",
