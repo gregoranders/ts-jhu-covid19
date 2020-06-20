@@ -12,13 +12,14 @@
 [![types][npm-types-image]][npm-types-url]
 [![node][node-image]][node-url]
 
-[![Main Language](https://img.shields.io/github/languages/top/gregoranders/ts-jhu-covid19)][code-metric-url] [![Languages](https://img.shields.io/github/languages/count/gregoranders/ts-jhu-covid19)][code-metric-url] [![Code Size](https://img.shields.io/github/languages/code-size/gregoranders/ts-jhu-covid19)][code-metric-url] [![Repo-Size](https://img.shields.io/github/repo-size/gregoranders/ts-jhu-covid19)][code-metric-url]
+[![Main Language][language-image]][code-metric-url] [![Languages][languages-image]][code-metric-url] [![Code Size][code-size-image]][code-metric-url] [![Repo-Size][repo-size-image]][code-metric-url]
 
 ## Features
 
-- TypeScript
-- Jest Snapshot/Unit Tests with Code Coverage
-- GitHub CI Integration (feature, development, master)
+- [TypeScript][typescript-url]
+- [Jest][jest-url] Unit Tests with Code Coverage
+- GitHub CI Integration (feature, development, master, release)
+- Publish via CI
 - Code Quality via Code Climate
 
 |                                                                  |                                                                            |                                                                              |
@@ -30,7 +31,7 @@
 ## Example
 
 ```sh
-npm install --save-dev @gregoranders/jhu-covid19
+npm install @gregoranders/jhu-covid19
 ```
 
 ```ts
@@ -66,7 +67,7 @@ npm run build
 
 ### Testing
 
-#### Test using [Jest](https://jestjs.io/)
+#### Test using [Jest][jest-url]
 
 ```
 npm test
@@ -126,3 +127,9 @@ npm run clear
 [npm-types-image]: https://img.shields.io/npm/types/@gregoranders/jhu-covid19
 [release-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
 [release-image]: https://img.shields.io/github/release/gregoranders/ts-jhu-covid19
+[language-image]: https://img.shields.io/github/languages/top/gregoranders/ts-csv
+[languages-image]: https://img.shields.io/github/languages/count/gregoranders/ts-csv
+[code-size-image]: https://img.shields.io/github/languages/code-size/gregoranders/ts-csv
+[repo-size-image]: https://img.shields.io/github/repo-size/gregoranders/ts-csv
+[typescript-url]: http://www.typescriptlang.org/
+[jest-url]: https://jestjs.io
