@@ -21,12 +21,7 @@
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "docs",
-    "CHANGELOG.md",
-    "SECURITY.md",
-    "README.md",
-    "LICENSE"
+    "dist"
   ],
   "engines": {
     "node": ">=0.10.0"
