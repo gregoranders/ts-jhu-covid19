@@ -157,11 +157,47 @@ export const Configuration: Record<Type, string> = {
   recovered: `${BASE_URL}csse_covid_19_time_series/time_series_covid19_recovered_global.csv`,
 };
 
+/**
+ * fetch like interface  result
+ *
+ * @public
+ */
+export type FetchLikeResult = {
+  text(): Promise<string>;
+};
+
+/**
+ * fetch like interface options
+ * @public
+ */
+export type FetchLikeOptions = {
+  headers: Record<string, string>;
+  method: 'GET';
+};
+
+/**
+ * fetch like interface
+ *
+ * @param url - url
+ * @param options - {@link FetchLikeOptions}
+ *
+ * @returns {@link FetchLikeResult}
+ *
+ * @public
+ */
+export type FetchLike = (
+  url: string,
+  options?: FetchLikeOptions,
+) => Promise<FetchLikeResult>;
+
 export class ModelCollector {
   private readonly _modelMapper = new ModelMapper();
   private readonly _lookupMapper = new LookupMapper();
 
-  public constructor(private _configuration = Configuration) {}
+  public constructor(
+    private _fetchImpl: FetchLike,
+    private _configuration = Configuration,
+  ) {}
 
   public async collect(): Promise<readonly RowModel[]> {
     const lookup = await this._fetchLookup();
@@ -281,7 +317,7 @@ export class ModelCollector {
   }
 
   private async _fetch(type: Type) {
-    const response = await fetch(this._fetchUrl(type), {
+    const response = await this._fetchImpl(this._fetchUrl(type), {
       headers: this._fetchHeaders(),
       method: 'GET',
     });

@@ -37,10 +37,11 @@ npm install @gregoranders/jhu-covid19
 ```
 
 ```ts
+import fetch from 'node-fetch';
 import Provider from '@gregoranders/jhu-covid19';
 
 const main = async () => {
-  const provider = new Provider();
+  const provider = new Provider(fetch);
   const model = await provider.get();
 
   console.log(model);

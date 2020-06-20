@@ -5,6 +5,20 @@
 ```ts
 
 // @public
+export type FetchLike = (url: string, options?: FetchLikeOptions) => Promise<FetchLikeResult>;
+
+// @public
+export type FetchLikeOptions = {
+    headers: Record<string, string>;
+    method: 'GET';
+};
+
+// @public
+export type FetchLikeResult = {
+    text(): Promise<string>;
+};
+
+// @public
 export const libname = "@gregoranders/jhu-covid19";
 
 // @public
@@ -57,6 +71,7 @@ export interface Model {
 
 // @public
 class Provider {
+    constructor(_fetch: FetchLike);
     get(): Promise<Model[]>;
 }
 

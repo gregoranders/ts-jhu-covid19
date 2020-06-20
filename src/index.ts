@@ -35,6 +35,9 @@ export const liburl = 'https://gregoranders.github.io/ts-jhu-covid19/';
  * @public
  */
 export {
+  FetchLike,
+  FetchLikeOptions,
+  FetchLikeResult,
   Metric,
   MetricValue,
   MetricValueAvrg,

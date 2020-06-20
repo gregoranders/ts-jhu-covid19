@@ -42,9 +42,8 @@ describe(`${libname} ${libversion} - collector`, () => {
   describe('collect', () => {
     it('empty on empty responses', async () => {
       const mockedFetch = mockFetch('', '', '', '');
-      global.fetch = mockedFetch;
 
-      const collector = new TestSubject.ModelCollector();
+      const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
         'Accept-Encoding': 'gzip, deflate, br',
@@ -59,9 +58,8 @@ describe(`${libname} ${libversion} - collector`, () => {
       const deaths = 'Country,State,01/01/20\nGermany,,100';
       const recovered = 'Country,State,01/01/20\nGermany,,10';
       const mockedFetch = mockFetch(lookup, confirmed, deaths, recovered);
-      global.fetch = mockedFetch;
 
-      const collector = new TestSubject.ModelCollector();
+      const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
         'Accept-Encoding': 'gzip, deflate, br',
@@ -94,9 +92,8 @@ describe(`${libname} ${libversion} - collector`, () => {
       recovered =
         ',Germany,51.0,9.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,12,12,12,14,14,14,14,14,15,16,16,16,16,16,16,16,16,17,18,18,18,18,25,25,46,46,46,67,67,105,113,180,233,266,266,3243,3547,5673,6658,8481,9211,13500,16100,18700,22440,24575,26400,28700,28700,36081,46300,52407,53913,57400,60300,64300,68200,72600,77000,83114,85400,88000,91500,95200,99400,103300,109800,109800,112000,114500,117400,120400,123500,126900,129000,130600,132700,135100,139900,141700,141700,143300,144400,145617,147200,148700,150300,151597,152600,154011,155041,155681,156966,158087,159064,159716,160281,161199,161967,162820,163360,164245,164908,165352,165632,166609,167453,167909,168480,168958,169224,169556,170129,170630,170961';
       const mockedFetch = mockFetch(lookup, confirmed, deaths, recovered);
-      global.fetch = mockedFetch;
 
-      const collector = new TestSubject.ModelCollector();
+      const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
         'Accept-Encoding': 'gzip, deflate, br',
@@ -123,9 +120,8 @@ describe(`${libname} ${libversion} - collector`, () => {
       const recovered =
         'Country,State,01/01/20\nB,,2\nA,Z,100\nA,A,1000\nA,,100';
       const mockedFetch = mockFetch(lookup, confirmed, deaths, recovered);
-      global.fetch = mockedFetch;
 
-      const collector = new TestSubject.ModelCollector();
+      const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
 
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
@@ -174,9 +170,8 @@ describe(`${libname} ${libversion} - collector`, () => {
       const deaths = 'Country,State,01/01/20\nA,,1000';
       const recovered = 'Country,State,01/01/20\nA,,100';
       const mockedFetch = mockFetch(lookup, confirmed, deaths, recovered);
-      global.fetch = mockedFetch;
 
-      const collector = new TestSubject.ModelCollector();
+      const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
 
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
@@ -201,9 +196,8 @@ describe(`${libname} ${libversion} - collector`, () => {
       const deaths = 'Country,State,01/01/20';
       const recovered = 'Country,State,01/01/20\nA,,100';
       const mockedFetch = mockFetch(lookup, confirmed, deaths, recovered);
-      global.fetch = mockedFetch;
 
-      const collector = new TestSubject.ModelCollector();
+      const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
 
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
@@ -228,9 +222,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       const deaths = 'Country,State,01/01/20\nA,,100';
       const recovered = 'Country,State,01/01/20';
       const mockedFetch = mockFetch(lookup, confirmed, deaths, recovered);
-      global.fetch = mockedFetch;
-
-      const collector = new TestSubject.ModelCollector();
+      const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
 
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
