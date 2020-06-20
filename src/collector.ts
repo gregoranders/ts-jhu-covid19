@@ -23,7 +23,10 @@ const sortByCountryAndState = (a: CountryState, b: CountryState): number => {
 
 type MappedRow = Record<string, string> & CountryState;
 
-const mapRows = <T extends CountryState, R extends CountryState>(values: readonly T[], map: (value: T) => R): readonly R[] => {
+const mapRows = <T extends CountryState, R extends CountryState>(
+  values: readonly T[],
+  map: (value: T) => R,
+): readonly R[] => {
   return values.map((value) => map(value));
 };
 
@@ -53,14 +56,20 @@ class ModelMapper extends BaseMapper<TempModel> {
     } as TempModel & Record<string, number | string>;
 
     Object.keys(row).forEach((key) => {
-      const found = Object.keys(ModelMapper._keys).find((temp) => key.match(new RegExp(temp)));
+      const found = Object.keys(ModelMapper._keys).find((temp) =>
+        key.match(new RegExp(temp)),
+      );
 
       if (found) {
         mapped[found.toLowerCase()] = ModelMapper._keys[found](row[key]);
       } else {
         const value = parseInt(row[key] as string, 10);
         const date = new Date(key);
-        const timestamp = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+        const timestamp = Date.UTC(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate(),
+        );
         mapped.values.push({ timestamp, value });
       }
     });
@@ -138,7 +147,8 @@ enum Type {
   LOOKUP = 'lookup',
 }
 
-const BASE_URL = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/';
+const BASE_URL =
+  'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/';
 
 export const Configuration: Record<Type, string> = {
   confirmed: `${BASE_URL}csse_covid_19_time_series/time_series_covid19_confirmed_global.csv`,
@@ -162,31 +172,66 @@ export class ModelCollector {
     return this.merge(confirmed, deaths, recovered, lookup);
   }
 
-  private async merge(confirmed: readonly TempModel[], deaths: readonly TempModel[], recovered: readonly TempModel[], lookups: readonly Lookup[]) {
+  private async merge(
+    confirmed: readonly TempModel[],
+    deaths: readonly TempModel[],
+    recovered: readonly TempModel[],
+    lookups: readonly Lookup[],
+  ) {
     return confirmed.map((model) => {
-      const lookup = this.findCountryState(lookups, model);
-      const modelDeaths = this.findCountryState(deaths, model);
-      const modelRecovered = this.findCountryState(recovered, model);
-      const values = model.values.map((value) => {
-        return Object.freeze({
-          confirmed: value.value,
-          deaths: this.findSeries(value.timestamp, modelDeaths ? modelDeaths.values : []),
-          recovered: this.findSeries(value.timestamp, modelRecovered ? modelRecovered.values : []),
-          timestamp: value.timestamp,
-        }) as RowModelValue;
-      });
+      const { lookup, modelDeaths, modelRecovered } = this.lookup(
+        model,
+        lookups,
+        deaths,
+        recovered,
+      );
+      const values = this.mapModel(model, modelDeaths, modelRecovered);
       return Object.freeze({
         country: model.country,
         lat: model.lat,
         lon: model.lon,
         state: model.state,
-        population: lookup && lookup.population || 0,
+        population: (lookup && lookup.population) || 0,
         values: Object.freeze(values),
       }) as RowModel;
     });
   }
 
-  private findCountryState<R extends CountryState, T extends CountryState>(models: readonly R[], model: T): R | undefined {
+  private mapModel(
+    model: TempModel,
+    deaths: TempModel | undefined,
+    recovered: TempModel | undefined,
+  ) {
+    return model.values.map((value) => {
+      return Object.freeze({
+        confirmed: value.value,
+        deaths: this.findSeries(value.timestamp, deaths ? deaths.values : []),
+        recovered: this.findSeries(
+          value.timestamp,
+          recovered ? recovered.values : [],
+        ),
+        timestamp: value.timestamp,
+      }) as RowModelValue;
+    });
+  }
+
+  private lookup(
+    model: TempModel,
+    lookups: readonly Lookup[],
+    deaths: readonly TempModel[],
+    recovered: readonly TempModel[],
+  ) {
+    const lookup = this.findCountryState(lookups, model);
+    const modelDeaths = this.findCountryState(deaths, model);
+    const modelRecovered = this.findCountryState(recovered, model);
+
+    return { lookup, modelDeaths, modelRecovered };
+  }
+
+  private findCountryState<R extends CountryState, T extends CountryState>(
+    models: readonly R[],
+    model: T,
+  ): R | undefined {
     return models.find((temp) => {
       let ret = temp.country.localeCompare(model.country);
       if (ret === 0) {
@@ -198,7 +243,10 @@ export class ModelCollector {
     });
   }
 
-  private findSeries(timestamp: number, series: { timestamp: number; value: number }[]): number {
+  private findSeries(
+    timestamp: number,
+    series: { timestamp: number; value: number }[],
+  ): number {
     const found = series.find((temp) => temp.timestamp === timestamp);
     if (found) {
       return found.value;
@@ -253,4 +301,3 @@ export class ModelCollector {
 }
 
 export default ModelCollector;
-

@@ -1,6 +1,5 @@
 import { ModelCollector, RowModel, RowModelValue } from './collector';
 
-
 /**
  * metric value type
  *
@@ -70,7 +69,7 @@ export interface MetricValue extends Record<MetricValueType, number> {
    * @readonly
    */
   active: number;
-};
+}
 
 /**
  * precalculated average type - in days
@@ -110,7 +109,8 @@ export type MetricValueAvrgType = 5 | 7 | 14 | 21 | 28;
  * @public
  * @readonly
  */
-export interface MetricValueAvrg extends Record<MetricValueAvrgType, MetricValue> {
+export interface MetricValueAvrg
+  extends Record<MetricValueAvrgType, MetricValue> {
   /**
    * 5 days average
    *
@@ -304,7 +304,11 @@ export class ModelProcessor {
     });
   }
 
-  private diff(value: RowModelValue, index: number, all: RowModelValue[]): MetricValue {
+  private diff(
+    value: RowModelValue,
+    index: number,
+    all: RowModelValue[],
+  ): MetricValue {
     if (!index) {
       return DEFAULT_METRIC_VALUE;
     } else {
@@ -327,7 +331,10 @@ export class ModelProcessor {
     };
   }
 
-  private averagesRatio(values: MetricValueAvrg, factor: number): MetricValueAvrg {
+  private averagesRatio(
+    values: MetricValueAvrg,
+    factor: number,
+  ): MetricValueAvrg {
     return {
       5: this.ratio(values[5], factor),
       7: this.ratio(values[7], factor),
@@ -337,7 +344,11 @@ export class ModelProcessor {
     };
   }
 
-  private avrg(back: number, index: number, all: RowModelValue[]): MetricValue {
+  private avrg(
+    back: number,
+    index: number,
+    all: RowModelValue[],
+  ): MetricValue {
     let sum = DEFAULT_METRIC_VALUE;
 
     if (!index) {

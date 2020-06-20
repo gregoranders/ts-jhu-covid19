@@ -1,14 +1,18 @@
 {
-  "extends": [
-    "eslint:recommended"
-  ],
+  "root": true,
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parserOptions": {
-    "ecmaVersion": 2020,
     "sourceType": "module",
-    "ecmaFeatures": {
-    }
+    "ecmaFeatures": {}
   },
   "env": {
-    "node": true
+    "browser": true,
+    "commonjs": true,
+    "es2020": true
+  },
+  "rules": {
+    "no-prototype-builtins": "off",
+    "no-redeclare": "off",
+    "no-unused-vars": "off"
   }
 }

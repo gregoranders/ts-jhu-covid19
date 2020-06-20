@@ -5,16 +5,16 @@
   "scripts": {
     "clear": "npm run prescript && npm run pretest && rimraf ./node_modules ./package-lock.json ./temp",
     "build": "cross-env NODE_ENV=production npm run script",
-    "postbuild": "eslint src/**/*.ts --fix --quiet",
+    "postbuild": "eslint --no-eslintrc --config .eslintrc-cc.json --ext js --fix ./dist",
     "pretest": "rimraf ./test junit.xml",
     "test": "jest --runInBand --coverage --coverageDirectory ../test/coverage --rootDir ./src",
     "prescript": "rimraf ./dist",
     "script": "npm run script:cjs && npm run script:esm",
     "script:cjs": "tsc --project ./ --module commonjs --target es5 --outDir ./dist/cjs",
     "script:esm": "tsc --project ./ --module es6 --declaration --declarationDir ./dist/esm --outDir ./dist/esm",
-    "prepare": "npm test && npm run build && npm run api-extractor && npm run api-documenter && rimraf ./dist/esm/index.d.ts ./dist/index.api.json",
-    "api-extractor": "api-extractor run --local --verbose",
-    "api-documenter": "api-documenter markdown --input ./dist --output ./docs/api",
+    "prepare": "npm test && npm run build && npm run docs && rimraf ./dist/esm/index.d.ts ./dist/index.api.json",
+    "docs": "api-extractor run --local --verbose && api-documenter markdown --input ./dist --output ./docs/api",
+    "postdocs": "eslint --ext ts --fix ./dist",
     "codeclimate": "docker run --interactive --tty --rm --env CODECLIMATE_CODE=\"$PWD\" --volume \"$PWD\":/code --volume /var/run/docker.sock:/var/run/docker.sock --volume /tmp/cc:/tmp/cc codeclimate/codeclimate analyze"
   },
   "main": "dist/cjs/index.js",
@@ -43,12 +43,9 @@
   "eslintConfig": {
     "root": true,
     "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
     "extends": [
-      "eslint:recommended",
       "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended",
       "prettier/@typescript-eslint"
     ],
     "parserOptions": {
