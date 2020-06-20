@@ -14,6 +14,8 @@
 
 [![Main Language][language-image]][code-metric-url] [![Languages][languages-image]][code-metric-url] [![Code Size][code-size-image]][code-metric-url] [![Repo-Size][repo-size-image]][code-metric-url]
 
+# Requires `fetch`
+
 ## Features
 
 - [TypeScript][typescript-url]
