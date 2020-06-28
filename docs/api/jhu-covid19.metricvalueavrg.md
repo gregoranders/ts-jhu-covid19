@@ -11,6 +11,7 @@ metric value averages
 ```typescript
 export interface MetricValueAvrg extends Record<MetricValueAvrgType, MetricValue> 
 ```
+<b>Extends:</b> Record&lt;[MetricValueAvrgType](./jhu-covid19.metricvalueavrgtype.md)<!-- -->, [MetricValue](./jhu-covid19.metricvalue.md)<!-- -->&gt;
 
 ## Example
 

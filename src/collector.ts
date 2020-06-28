@@ -46,8 +46,8 @@ class ModelMapper extends BaseMapper<TempModel> {
   static _keys = {
     State: (value: string) => value,
     Country: (value: string) => value.replace(/\*/, ''),
-    Lat: (value: string) => parseInt(value),
-    Long: (value: string) => parseInt(value),
+    Lat: (value: string) => Number.parseInt(value),
+    Long: (value: string) => Number.parseInt(value),
   } as Record<string, (value: string) => string | number>;
 
   protected _map<T extends MappedRow>(row: T): TempModel {
@@ -56,14 +56,14 @@ class ModelMapper extends BaseMapper<TempModel> {
     } as TempModel & Record<string, number | string>;
 
     Object.keys(row).forEach((key) => {
-      const found = Object.keys(ModelMapper._keys).find((temp) =>
-        key.match(new RegExp(temp)),
+      const found = Object.keys(ModelMapper._keys).find((temporary) =>
+        key.match(new RegExp(temporary)),
       );
 
       if (found) {
         mapped[found.toLowerCase()] = ModelMapper._keys[found](row[key]);
       } else {
-        const value = parseInt(row[key] as string, 10);
+        const value = Number.parseInt(row[key] as string, 10);
         const date = new Date(key);
         const timestamp = Date.UTC(
           date.getFullYear(),
@@ -98,29 +98,31 @@ class LookupMapper extends BaseMapper<Lookup> {
   static _keys = {
     State: (value: string) => value,
     Country: (value: string) => value.replace(/\*/, ''),
-    Lat: (value: string) => parseInt(value),
-    Long: (value: string) => parseInt(value),
-    Population: (value: string) => parseInt(value),
-    UID: (value: string) => parseInt(value),
+    Lat: (value: string) => Number.parseInt(value),
+    Long: (value: string) => Number.parseInt(value),
+    Population: (value: string) => Number.parseInt(value),
+    UID: (value: string) => Number.parseInt(value),
     iso2: (value: string) => value,
     iso3: (value: string) => value,
-    code3: (value: string) => parseInt(value),
-    FIPS: (value: string) => parseInt(value),
+    code3: (value: string) => Number.parseInt(value),
+    FIPS: (value: string) => Number.parseInt(value),
     Admin2: (value: string) => value,
   } as Record<string, (value: string) => string | number>;
 
   protected _map<T extends MappedRow>(row: T): Lookup {
-    const temp = {} as Record<string, number | string>;
+    const temporary = {} as Record<string, number | string>;
 
     Object.keys(row).forEach((key) => {
-      Object.keys(LookupMapper._keys).forEach((tmp) => {
-        if (key.match(new RegExp(tmp))) {
-          temp[tmp.toLowerCase()] = LookupMapper._keys[tmp](row[key]);
+      Object.keys(LookupMapper._keys).forEach((temporary_) => {
+        if (key.match(new RegExp(temporary_))) {
+          temporary[temporary_.toLowerCase()] = LookupMapper._keys[
+            temporary_
+          ](row[key]);
         }
       });
     });
 
-    return Object.freeze((temp as unknown) as Lookup);
+    return Object.freeze((temporary as unknown) as Lookup);
   }
 }
 
@@ -268,14 +270,14 @@ export class ModelCollector {
     models: readonly R[],
     model: T,
   ): R | undefined {
-    return models.find((temp) => {
-      let ret = temp.country.localeCompare(model.country);
-      if (ret === 0) {
+    return models.find((temporary) => {
+      let returnValue = temporary.country.localeCompare(model.country);
+      if (returnValue === 0) {
         if (model.state) {
-          ret = model.state.localeCompare(temp.state || '');
+          returnValue = model.state.localeCompare(temporary.state || '');
         }
       }
-      return ret === 0 ? true : false;
+      return returnValue === 0 ? true : false;
     });
   }
 
@@ -283,7 +285,9 @@ export class ModelCollector {
     timestamp: number,
     series: { timestamp: number; value: number }[],
   ): number {
-    const found = series.find((temp) => temp.timestamp === timestamp);
+    const found = series.find(
+      (temporary) => temporary.timestamp === timestamp,
+    );
     if (found) {
       return found.value;
     }

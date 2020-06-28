@@ -1,4 +1,4 @@
-import * as TestSubject from './index';
+import * as TestSubject from '.';
 
 describe(`${TestSubject.libname} ${TestSubject.libversion}`, () => {
   describe('exports', () => {
@@ -7,7 +7,7 @@ describe(`${TestSubject.libname} ${TestSubject.libversion}`, () => {
     });
 
     it('libversion', () => {
-      expect(TestSubject.libversion).toBe('0.0.7');
+      expect(TestSubject.libversion).toBe('0.0.8');
     });
 
     it('liburl', () => {
