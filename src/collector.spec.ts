@@ -1,4 +1,4 @@
-import { libname, libversion } from './index';
+import { libname, libversion } from '.';
 import * as TestSubject from './collector';
 
 const resolved = (text: string) =>

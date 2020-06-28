@@ -21,7 +21,7 @@ export const libname = '@gregoranders/jhu-covid19';
  * @public
  * @readonly
  */
-export const libversion = '0.0.7';
+export const libversion = '0.0.8';
 
 /**
  * library homepage

@@ -11,6 +11,7 @@ daily metric
 ```typescript
 export interface Metric extends MetricValue 
 ```
+<b>Extends:</b> [MetricValue](./jhu-covid19.metricvalue.md)
 
 ## Properties
 

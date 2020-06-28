@@ -21,6 +21,7 @@
     "jest": true
   },
   "rules": {
+    "unicorn/no-fn-reference-in-iterator": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",

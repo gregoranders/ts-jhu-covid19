@@ -11,6 +11,7 @@ metric value
 ```typescript
 export interface MetricValue extends Record<MetricValueType, number> 
 ```
+<b>Extends:</b> Record&lt;[MetricValueType](./jhu-covid19.metricvaluetype.md)<!-- -->, number&gt;
 
 ## Example
 
