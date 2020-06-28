@@ -40,22 +40,6 @@
     "jest",
     "typescript"
   ],
-  "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "extends": [
-      "plugin:@typescript-eslint/recommended",
-      "plugin:prettier/recommended",
-      "prettier/@typescript-eslint"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020,
-      "sourceType": "module",
-      "ecmaFeatures": {}
-    },
-    "rules": {},
-    "settings": {}
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged && npm run prepare",
