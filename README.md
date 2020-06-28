@@ -1,5 +1,7 @@
 # @gregoranders/jhu-covid19
 
+# [<img src="./typescript.svg" />][typescript-url]
+
 ## Provides access to the data published at the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19)
 
 ## [API Docs](./docs/api/index.md)
