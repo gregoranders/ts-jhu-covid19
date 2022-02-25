@@ -1,14 +1,9 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
 
-  // "extends": "./api-extractor.json",
-
   "projectFolder": ".",
 
-  /**
-   * SUPPORTED TOKENS: <projectFolder>, <packageName>, <unscopedPackageName>
-   */
-  "mainEntryPointFilePath": "<projectFolder>/dist/esm/index.d.ts",
+  "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts",
 
   "bundledPackages": [],
 
@@ -18,8 +13,7 @@
   },
 
   "apiReport": {
-    "enabled": true,
-    "reportFolder": "<projectFolder>/docs"
+    "enabled": true
   },
 
   "docModel": {
@@ -34,7 +28,7 @@
   },
 
   "tsdocMetadata": {
-    "enabled": false,
+    "enabled": true,
     "tsdocMetadataFilePath": "<projectFolder>/dist/tsdoc-metadata.json"
   },
 

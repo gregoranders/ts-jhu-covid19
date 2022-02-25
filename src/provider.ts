@@ -1,13 +1,4 @@
-import {
-  FetchLike,
-  FetchLikeOptions,
-  FetchLikeResult,
-  ModelCollector,
-  RowModel,
-  RowModelValue,
-} from './collector';
-
-export { FetchLike, FetchLikeOptions, FetchLikeResult };
+import { FetchLike, ModelCollector, RowModel, RowModelValue } from './collector';
 
 /**
  * metric value type
@@ -118,8 +109,7 @@ export type MetricValueAvrgType = 5 | 7 | 14 | 21 | 28;
  * @public
  * @readonly
  */
-export interface MetricValueAvrg
-  extends Record<MetricValueAvrgType, MetricValue> {
+export interface MetricValueAvrg extends Record<MetricValueAvrgType, MetricValue> {
   /**
    * 5 days average
    *
@@ -262,7 +252,7 @@ export class ModelProcessor {
   private _model: Model[] = [];
 
   public constructor(model: readonly RowModel[]) {
-    if (model && model.length) {
+    if (model && model.length > 0) {
       this._model = this._process(model);
     }
   }
@@ -273,13 +263,13 @@ export class ModelProcessor {
 
   private _process(models: readonly RowModel[]) {
     return models.map((model) => {
-      const factor = model.population ? model.population / 100000 : 1;
+      const factor = model.population ? model.population / 100_000 : 1;
       const mapped = {
         country: model.country,
         population: model.population,
       } as Model;
 
-      if (model.state && model.state.length) {
+      if (model.state && model.state.length > 0) {
         mapped.state = model.state;
       }
 
@@ -313,21 +303,15 @@ export class ModelProcessor {
     });
   }
 
-  private _diff(
-    value: RowModelValue,
-    index: number,
-    all: RowModelValue[],
-  ): MetricValue {
-    if (!index) {
-      return { ...DEFAULT_METRIC_VALUE };
-    } else {
-      return {
-        confirmed: value.confirmed - all[index - 1].confirmed,
-        dead: value.deaths - all[index - 1].deaths,
-        recovered: value.recovered - all[index - 1].recovered,
-        active: this._active(value) - this._active(all[index - 1]),
-      };
-    }
+  private _diff(value: RowModelValue, index: number, all: RowModelValue[]): MetricValue {
+    return !index
+      ? { ...DEFAULT_METRIC_VALUE }
+      : {
+          confirmed: value.confirmed - all[index - 1].confirmed,
+          dead: value.deaths - all[index - 1].deaths,
+          recovered: value.recovered - all[index - 1].recovered,
+          active: this._active(value) - this._active(all[index - 1]),
+        };
   }
 
   private _averages(values: RowModelValue[], index: number): MetricValueAvrg {
@@ -340,10 +324,7 @@ export class ModelProcessor {
     };
   }
 
-  private _averagesRatio(
-    values: MetricValueAvrg,
-    factor: number,
-  ): MetricValueAvrg {
+  private _averagesRatio(values: MetricValueAvrg, factor: number): MetricValueAvrg {
     return {
       5: this._ratio(values[5], factor),
       7: this._ratio(values[7], factor),
@@ -353,11 +334,7 @@ export class ModelProcessor {
     };
   }
 
-  private _avrg(
-    back: number,
-    index: number,
-    all: RowModelValue[],
-  ): MetricValue {
+  private _avrg(back: number, index: number, all: RowModelValue[]): MetricValue {
     const sum = { ...DEFAULT_METRIC_VALUE };
 
     if (index === 0) {
@@ -366,8 +343,8 @@ export class ModelProcessor {
       sum.recovered = all[index].recovered;
       sum.active = this._active(all[index]);
     } else {
-      for (let idx = index; idx > index - back && idx > 0; idx--) {
-        const diff = this._diff(all[idx], idx, all);
+      for (let index_ = index; index_ > index - back && index_ > 0; index_--) {
+        const diff = this._diff(all[index_], index_, all);
         sum.confirmed += diff.confirmed;
         sum.dead += diff.dead;
         sum.recovered += diff.recovered;
@@ -411,7 +388,7 @@ export class ModelProcessor {
  * import Provider from '@gregoranders/jhu-covid19';
  *
  * const main = async () => {
- *   const provider = new Provider();
+ *   const provider = new Provider(fetch);
  *   const model = await provider.get();
  *
  *   console.log(model);
@@ -454,7 +431,7 @@ export class Provider {
     const collector = new ModelCollector(this._fetch);
     const model = await collector.collect();
     const processor = new ModelProcessor(model);
-    return Promise.resolve(processor.model);
+    return processor.model;
   }
 }
 
@@ -464,3 +441,5 @@ export class Provider {
  * @public
  */
 export default Provider;
+
+export { FetchLike, FetchLikeOptions, FetchLikeResult } from './collector';

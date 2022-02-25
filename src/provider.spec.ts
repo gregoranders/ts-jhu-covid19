@@ -6,12 +6,7 @@ const resolved = (text: string) =>
     text: () => Promise.resolve(text),
   });
 
-const mockFetch = (
-  lookup: string,
-  confirmed: string,
-  deaths: string,
-  recovered: string,
-) =>
+const mockFetch = (lookup: string, confirmed: string, deaths: string, recovered: string) =>
   jest.fn().mockImplementation((url: string) => {
     switch (url) {
       case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv':
@@ -50,24 +45,21 @@ describe(`${libname} ${libversion} - provider`, () => {
       const provider = new TestSubject.Provider(mockedFetch);
       const data = await provider.get();
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
       expect(mockedFetch).toHaveBeenCalledTimes(4);
       expect(data).toHaveLength(0);
     });
 
     it('metrics', async () => {
-      let lookup =
-        'UID,iso2,iso3,code3,FIPS,Admin2,Province_State,Country_Region,Lat,Long_,Combined_Key,Population\n';
-      lookup +=
-        '276,DE,DEU,276,,,,Germany,51.165691,10.451526,Germany,83783945\n';
+      let lookup = 'UID,iso2,iso3,code3,FIPS,Admin2,Province_State,Country_Region,Lat,Long_,Combined_Key,Population\n';
+      lookup += '276,DE,DEU,276,,,,Germany,51.165691,10.451526,Germany,83783945\n';
       lookup +=
         '3601,AU,AUS,36,,,Australian Capital Territory,Australia,-35.4735,149.0124,"Australian Capital Territory, Australia",0';
 
       const header = 'Province/State,Country/Region,Lat,Long,1/1/20,2/1/20\n';
       const germany = ',Germany,51.0,9.0,';
-      const australia =
-        'Australian Capital Territory,Australia,-35.4735,149.0124,';
+      const australia = 'Australian Capital Territory,Australia,-35.4735,149.0124,';
 
       let confirmed = header;
       confirmed += germany;
@@ -98,7 +90,7 @@ describe(`${libname} ${libversion} - provider`, () => {
       const provider = new TestSubject.Provider(mockedFetch);
       const data = await provider.get();
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
 
       expect(mockedFetch).toHaveBeenCalledTimes(4);

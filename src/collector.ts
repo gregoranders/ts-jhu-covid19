@@ -1,16 +1,16 @@
 import Parser from '@gregoranders/csv';
 
-type TempModelValue = {
+type TemporaryModelValue = {
   value: number;
   timestamp: number;
 };
 
 type CountryState = { country: string; state: string };
 
-type TempModel = CountryState & {
+type TemporaryModel = CountryState & {
   lat: number;
   lon: number;
-  values: TempModelValue[];
+  values: TemporaryModelValue[];
 };
 
 const sortByCountryAndState = (a: CountryState, b: CountryState): number => {
@@ -42,7 +42,7 @@ abstract class BaseMapper<T extends CountryState> {
   protected abstract _map<V extends MappedRow>(row: V): T;
 }
 
-class ModelMapper extends BaseMapper<TempModel> {
+class ModelMapper extends BaseMapper<TemporaryModel> {
   static _keys = {
     State: (value: string) => value,
     Country: (value: string) => value.replace(/\*/, ''),
@@ -50,33 +50,27 @@ class ModelMapper extends BaseMapper<TempModel> {
     Long: (value: string) => Number.parseInt(value),
   } as Record<string, (value: string) => string | number>;
 
-  protected _map<T extends MappedRow>(row: T): TempModel {
+  protected _map<T extends MappedRow>(row: T): TemporaryModel {
     const mapped = {
-      values: [] as TempModelValue[],
-    } as TempModel & Record<string, number | string>;
+      values: [] as TemporaryModelValue[],
+    } as TemporaryModel & Record<string, number | string>;
 
-    Object.keys(row).forEach((key) => {
-      const found = Object.keys(ModelMapper._keys).find((temporary) =>
-        key.match(new RegExp(temporary)),
-      );
+    for (const key of Object.keys(row)) {
+      const found = Object.keys(ModelMapper._keys).find((temporary) => key.match(new RegExp(temporary)));
 
       if (found) {
         mapped[found.toLowerCase()] = ModelMapper._keys[found](row[key]);
       } else {
         const value = Number.parseInt(row[key] as string, 10);
         const date = new Date(key);
-        const timestamp = Date.UTC(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate(),
-        );
+        const timestamp = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
         mapped.values.push({ timestamp, value });
       }
-    });
+    }
 
     Object.freeze(mapped.values);
 
-    return Object.freeze((mapped as unknown) as TempModel);
+    return Object.freeze(mapped as unknown as TemporaryModel);
   }
 }
 
@@ -112,17 +106,15 @@ class LookupMapper extends BaseMapper<Lookup> {
   protected _map<T extends MappedRow>(row: T): Lookup {
     const temporary = {} as Record<string, number | string>;
 
-    Object.keys(row).forEach((key) => {
-      Object.keys(LookupMapper._keys).forEach((temporary_) => {
-        if (key.match(new RegExp(temporary_))) {
-          temporary[temporary_.toLowerCase()] = LookupMapper._keys[
-            temporary_
-          ](row[key]);
+    for (const key of Object.keys(row)) {
+      for (const temporary_ of Object.keys(LookupMapper._keys)) {
+        if (new RegExp(temporary_).test(key)) {
+          temporary[temporary_.toLowerCase()] = LookupMapper._keys[temporary_](row[key]);
         }
-      });
-    });
+      }
+    }
 
-    return Object.freeze((temporary as unknown) as Lookup);
+    return Object.freeze(temporary as unknown as Lookup);
   }
 }
 
@@ -149,8 +141,7 @@ enum Type {
   LOOKUP = 'lookup',
 }
 
-const BASE_URL =
-  'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/';
+const BASE_URL = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/';
 
 export const Configuration: Record<Type, string> = {
   confirmed: `${BASE_URL}csse_covid_19_time_series/time_series_covid19_confirmed_global.csv`,
@@ -187,19 +178,13 @@ export type FetchLikeOptions = {
  *
  * @public
  */
-export type FetchLike = (
-  url: string,
-  options?: FetchLikeOptions,
-) => Promise<FetchLikeResult>;
+export type FetchLike = (url: string, options?: FetchLikeOptions) => Promise<FetchLikeResult>;
 
 export class ModelCollector {
   private readonly _modelMapper = new ModelMapper();
   private readonly _lookupMapper = new LookupMapper();
 
-  public constructor(
-    private _fetchImpl: FetchLike,
-    private _configuration = Configuration,
-  ) {}
+  public constructor(private _fetchImpl: FetchLike, private _configuration = Configuration) {}
 
   public async collect(): Promise<readonly RowModel[]> {
     const lookup = await this._fetchLookup();
@@ -211,18 +196,13 @@ export class ModelCollector {
   }
 
   private async merge(
-    confirmed: readonly TempModel[],
-    deaths: readonly TempModel[],
-    recovered: readonly TempModel[],
+    confirmed: readonly TemporaryModel[],
+    deaths: readonly TemporaryModel[],
+    recovered: readonly TemporaryModel[],
     lookups: readonly Lookup[],
   ) {
     return confirmed.map((model) => {
-      const { lookup, modelDeaths, modelRecovered } = this.lookup(
-        model,
-        lookups,
-        deaths,
-        recovered,
-      );
+      const { lookup, modelDeaths, modelRecovered } = this.lookup(model, lookups, deaths, recovered);
       const values = this.mapModel(model, modelDeaths, modelRecovered);
       return Object.freeze({
         country: model.country,
@@ -235,29 +215,22 @@ export class ModelCollector {
     });
   }
 
-  private mapModel(
-    model: TempModel,
-    deaths: TempModel | undefined,
-    recovered: TempModel | undefined,
-  ) {
+  private mapModel(model: TemporaryModel, deaths: TemporaryModel | undefined, recovered: TemporaryModel | undefined) {
     return model.values.map((value) => {
       return Object.freeze({
         confirmed: value.value,
         deaths: this.findSeries(value.timestamp, deaths ? deaths.values : []),
-        recovered: this.findSeries(
-          value.timestamp,
-          recovered ? recovered.values : [],
-        ),
+        recovered: this.findSeries(value.timestamp, recovered ? recovered.values : []),
         timestamp: value.timestamp,
       }) as RowModelValue;
     });
   }
 
   private lookup(
-    model: TempModel,
+    model: TemporaryModel,
     lookups: readonly Lookup[],
-    deaths: readonly TempModel[],
-    recovered: readonly TempModel[],
+    deaths: readonly TemporaryModel[],
+    recovered: readonly TemporaryModel[],
   ) {
     const lookup = this.findCountryState(lookups, model);
     const modelDeaths = this.findCountryState(deaths, model);
@@ -272,22 +245,15 @@ export class ModelCollector {
   ): R | undefined {
     return models.find((temporary) => {
       let returnValue = temporary.country.localeCompare(model.country);
-      if (returnValue === 0) {
-        if (model.state) {
-          returnValue = model.state.localeCompare(temporary.state || '');
-        }
+      if (returnValue === 0 && model.state) {
+        returnValue = model.state.localeCompare(temporary.state || '');
       }
       return returnValue === 0 ? true : false;
     });
   }
 
-  private findSeries(
-    timestamp: number,
-    series: { timestamp: number; value: number }[],
-  ): number {
-    const found = series.find(
-      (temporary) => temporary.timestamp === timestamp,
-    );
+  private findSeries(timestamp: number, series: { timestamp: number; value: number }[]): number {
+    const found = series.find((temporary) => temporary.timestamp === timestamp);
     if (found) {
       return found.value;
     }
@@ -300,6 +266,7 @@ export class ModelCollector {
         return this._parse(text);
       })
       .then((models) => {
+        // eslint-disable-next-line unicorn/no-array-callback-reference
         return this._modelMapper.map(models);
       });
   }
@@ -310,6 +277,7 @@ export class ModelCollector {
         return this._parse(text);
       })
       .then((models) => {
+        // eslint-disable-next-line unicorn/no-array-callback-reference
         return this._lookupMapper.map(models);
       });
   }
@@ -331,7 +299,7 @@ export class ModelCollector {
 
   private _fetchHeaders() {
     return {
-      'Accept-Encoding': 'gzip, deflate, br',
+      'Accept-Encoding': 'br, gzip, deflate',
     };
   }
 

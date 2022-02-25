@@ -1,34 +1,40 @@
 # @gregoranders/jhu-covid19
 
-# [<img src="./typescript.svg" />][typescript-url]
+<!-- markdownlint-disable-next-line MD033 -->
+## [<img src="./typescript.svg" />][typescript-url]
 
+<!-- markdownlint-disable-next-line MD013 -->
 ## Provides access to the data published at the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19)
 
 ## [API Docs](./docs/api/index.md)
 
-[![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
 [![Issues][issues-image]][issues-url]
-[![Code maintainability][code-maintainability-image]][code-maintainability-url] [![Code issues][code-issues-image]][code-issues-url] [![Code Technical Debt][code-tech-debt-image]][code-tech-debt-url]
+[![Code maintainability][code-maintainability-image]][code-maintainability-url]
+[![Code issues][code-issues-image]][code-issues-url]
+[![Code Technical Debt][code-tech-debt-image]][code-tech-debt-url]
 
 [![types][npm-types-image]][npm-types-url]
 [![node][node-image]][node-url]
 
-[![Main Language][language-image]][code-metric-url] [![Languages][languages-image]][code-metric-url] [![Code Size][code-size-image]][code-metric-url] [![Repo-Size][repo-size-image]][code-metric-url]
+[![Main Language][language-image]][code-metric-url]
+[![Languages][languages-image]][code-metric-url]
+[![Code Size][code-size-image]][code-metric-url]
+[![Repository Size][repo-size-image]][code-metric-url]
 
-# Requires `fetch`
+## Requires `fetch`
 
 ## Features
 
 - [TypeScript][typescript-url]
 - [Jest][jest-url] Unit Tests with Code Coverage
+- [API Docs Generation][api-url]
 - GitHub CI Integration (feature, development, master, release)
-- Publish via CI
-- Code Quality via Code Climate
+- Code Quality via [Code Climate](./docs/codeclimate.md) and [Codacy](./docs/codacy.md)
 
-|                                                                  |                                                                            |                                                                              |
+| GitHub                                                           | Coveralls                                                                  |                                                                              |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [![Release][release-image]][release-url]                         |                                                                            | [![npm][npm-image]][npm-url]                                                 |
+| [![Release Build][release-image]][release-url]                   |                                                                            | [![npm][npm-image]][npm-url]                                                 |
 | [![Master Build][master-build-image]][master-url]                | [![Master Coverage][master-coveralls-image]][master-coveralls-url]         | [![Master Version][master-version-image]][master-version-url]                |
 | [![Development Build][development-build-image]][development-url] | [![Test Coverage][development-coveralls-image]][development-coveralls-url] | [![Development Version][development-version-image]][development-version-url] |
 
@@ -54,19 +60,19 @@ main();
 
 ### Clone repository
 
-```
+```sh
 git clone https://github.com/gregoranders/ts-jhu-covid19
 ```
 
 ### Install dependencies
 
-```
+```sh
 npm install
 ```
 
 ### Build
 
-```
+```sh
 npm run build
 ```
 
@@ -74,19 +80,19 @@ npm run build
 
 #### Test using [Jest][jest-url]
 
-```
+```sh
 npm test
 ```
 
-### Code Climate Checks [docker required](docs/CODECLIMATE.md)
+### Code Climate Checks [docker required](docs/codeclimate.md)
 
-```
+```sh
 npm run codeclimate
 ```
 
 ### Clear
 
-```
+```sh
 npm run clear
 ```
 
@@ -95,10 +101,6 @@ npm run clear
 [development-url]: https://github.com/gregoranders/ts-jhu-covid19/tree/development
 [repository-url]: https://github.com/gregoranders/ts-jhu-covid19
 [code-metric-url]: https://github.com/gregoranders/ts-jhu-covid19/search?l=TypeScript
-[travis-url]: https://travis-ci.org/gregoranders/ts-jhu-covid19
-[travis-image]: https://travis-ci.org/gregoranders/ts-jhu-covid19.svg?branch=master
-[daviddm-url]: https://david-dm.org/gregoranders/ts-jhu-covid19
-[daviddm-image]: https://david-dm.org/gregoranders/ts-jhu-covid19.svg?branch=master
 [license-url]: https://github.com/gregoranders/ts-jhu-covid19/blob/master/LICENSE
 [license-image]: https://img.shields.io/github/license/gregoranders/ts-jhu-covid19.svg
 [master-version-url]: https://github.com/gregoranders/ts-jhu-covid19/blob/master/package.json
@@ -120,10 +122,6 @@ npm run clear
 [code-issues-image]: https://img.shields.io/codeclimate/issues/gregoranders/ts-jhu-covid19
 [code-tech-debt-url]: https://codeclimate.com/github/gregoranders/ts-jhu-covid19/maintainability
 [code-tech-debt-image]: https://img.shields.io/codeclimate/tech-debt/gregoranders/ts-jhu-covid19
-[master-circleci-image]: https://circleci.com/gh/gregoranders/ts-jhu-covid19/tree/master.svg?style=shield
-[master-circleci-url]: https://app.circleci.com/pipelines/github/gregoranders/ts-jhu-covid19?branch=master
-[development-circleci-image]: https://circleci.com/gh/gregoranders/ts-jhu-covid19/tree/development.svg?style=shield
-[development-circleci-url]: https://app.circleci.com/pipelines/github/gregoranders/ts-jhu-covid19?branch=development
 [npm-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
 [npm-image]: https://img.shields.io/npm/v/@gregoranders/jhu-covid19
 [node-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
@@ -138,3 +136,4 @@ npm run clear
 [repo-size-image]: https://img.shields.io/github/repo-size/gregoranders/ts-csv
 [typescript-url]: http://www.typescriptlang.org/
 [jest-url]: https://jestjs.io
+[api-url]: https://api-extractor.com/
