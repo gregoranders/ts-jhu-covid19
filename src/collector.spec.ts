@@ -6,25 +6,25 @@ const resolved = (text: string) =>
     text: () => Promise.resolve(text),
   });
 
-const mockFetch = (
-  lookup: string,
-  confirmed: string,
-  deaths: string,
-  recovered: string,
-) =>
+const mockFetch = (lookup: string, confirmed: string, deaths: string, recovered: string) =>
   jest.fn().mockImplementation((url: string) => {
     switch (url) {
-      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv':
+      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv': {
         return resolved(lookup);
-      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv':
+      }
+      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv': {
         return resolved(confirmed);
-      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv':
+      }
+      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv': {
         return resolved(deaths);
-      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv':
+      }
+      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv': {
         return resolved(recovered);
-      default:
+      }
+      default: {
         console.error(url);
         return { text: () => Promise.reject(url) };
+      }
     }
   });
 
@@ -46,7 +46,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
       expect(mockedFetch).toHaveBeenCalledTimes(4);
       expect(data).toHaveLength(0);
@@ -62,7 +62,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
       expect(mockedFetch).toHaveBeenCalledTimes(4);
       expect(data).toHaveLength(1);
@@ -71,14 +71,12 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[0].values[0].confirmed).toStrictEqual(1000);
       expect(data[0].values[0].deaths).toStrictEqual(100);
       expect(data[0].values[0].recovered).toStrictEqual(10);
-      expect(data[0].values[0].timestamp).toStrictEqual(1577836800000);
+      expect(data[0].values[0].timestamp).toStrictEqual(1_577_836_800_000);
     });
 
     it('live snapshot based', async () => {
-      let lookup =
-        'UID,iso2,iso3,code3,FIPS,Admin2,Province_State,Country_Region,Lat,Long_,Combined_Key,Population\n';
-      lookup +=
-        '276,DE,DEU,276,,,,Germany,51.165691,10.451526,Germany,83783945';
+      let lookup = 'UID,iso2,iso3,code3,FIPS,Admin2,Province_State,Country_Region,Lat,Long_,Combined_Key,Population\n';
+      lookup += '276,DE,DEU,276,,,,Germany,51.165691,10.451526,Germany,83783945';
       let confirmed =
         'Province/State,Country/Region,Lat,Long,1/22/20,1/23/20,1/24/20,1/25/20,1/26/20,1/27/20,1/28/20,1/29/20,1/30/20,1/31/20,2/1/20,2/2/20,2/3/20,2/4/20,2/5/20,2/6/20,2/7/20,2/8/20,2/9/20,2/10/20,2/11/20,2/12/20,2/13/20,2/14/20,2/15/20,2/16/20,2/17/20,2/18/20,2/19/20,2/20/20,2/21/20,2/22/20,2/23/20,2/24/20,2/25/20,2/26/20,2/27/20,2/28/20,2/29/20,3/1/20,3/2/20,3/3/20,3/4/20,3/5/20,3/6/20,3/7/20,3/8/20,3/9/20,3/10/20,3/11/20,3/12/20,3/13/20,3/14/20,3/15/20,3/16/20,3/17/20,3/18/20,3/19/20,3/20/20,3/21/20,3/22/20,3/23/20,3/24/20,3/25/20,3/26/20,3/27/20,3/28/20,3/29/20,3/30/20,3/31/20,4/1/20,4/2/20,4/3/20,4/4/20,4/5/20,4/6/20,4/7/20,4/8/20,4/9/20,4/10/20,4/11/20,4/12/20,4/13/20,4/14/20,4/15/20,4/16/20,4/17/20,4/18/20,4/19/20,4/20/20,4/21/20,4/22/20,4/23/20,4/24/20,4/25/20,4/26/20,4/27/20,4/28/20,4/29/20,4/30/20,5/1/20,5/2/20,5/3/20,5/4/20,5/5/20,5/6/20,5/7/20,5/8/20,5/9/20,5/10/20,5/11/20,5/12/20,5/13/20,5/14/20,5/15/20,5/16/20,5/17/20,5/18/20,5/19/20,5/20/20,5/21/20,5/22/20,5/23/20,5/24/20,5/25/20,5/26/20,5/27/20,5/28/20,5/29/20,5/30/20,5/31/20,6/1/20,6/2/20,6/3/20,6/4/20,6/5/20,6/6/20,6/7/20,6/8/20,6/9/20,6/10/20,6/11/20\n';
       confirmed +=
@@ -96,7 +94,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
 
       expect(mockedFetch).toHaveBeenCalledTimes(4);
@@ -108,24 +106,21 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[0].values[0].confirmed).toStrictEqual(0);
       expect(data[0].values[0].deaths).toStrictEqual(0);
       expect(data[0].values[0].recovered).toStrictEqual(0);
-      expect(data[0].values[0].timestamp).toStrictEqual(1579651200000);
+      expect(data[0].values[0].timestamp).toStrictEqual(1_579_651_200_000);
     });
 
     it('country/state sorting', async () => {
-      const lookup =
-        'Country,State,Population\nB,,2\nA,Z,10\nA,A,100\nA,,1000';
-      const confirmed =
-        'Country,State,01/01/20\nB,,2\nA,Z,1000\nA,A,100\nA,,10';
+      const lookup = 'Country,State,Population\nB,,2\nA,Z,10\nA,A,100\nA,,1000';
+      const confirmed = 'Country,State,01/01/20\nB,,2\nA,Z,1000\nA,A,100\nA,,10';
       const deaths = 'Country,State,01/01/20\nB,,2\nA,Z,10\nA,A,100\nA,,1000';
-      const recovered =
-        'Country,State,01/01/20\nB,,2\nA,Z,100\nA,A,1000\nA,,100';
+      const recovered = 'Country,State,01/01/20\nB,,2\nA,Z,100\nA,A,1000\nA,,100';
       const mockedFetch = mockFetch(lookup, confirmed, deaths, recovered);
 
       const collector = new TestSubject.ModelCollector(mockedFetch);
       const data = await collector.collect();
 
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
 
       expect(mockedFetch).toHaveBeenCalledTimes(4);
@@ -137,7 +132,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[0].values[0].confirmed).toStrictEqual(10);
       expect(data[0].values[0].deaths).toStrictEqual(1000);
       expect(data[0].values[0].recovered).toStrictEqual(100);
-      expect(data[0].values[0].timestamp).toStrictEqual(1577836800000);
+      expect(data[0].values[0].timestamp).toStrictEqual(1_577_836_800_000);
 
       expect(data[1].country).toStrictEqual('A');
       expect(data[1].state).toStrictEqual('A');
@@ -145,7 +140,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[1].values[0].confirmed).toStrictEqual(100);
       expect(data[1].values[0].deaths).toStrictEqual(100);
       expect(data[1].values[0].recovered).toStrictEqual(1000);
-      expect(data[1].values[0].timestamp).toStrictEqual(1577836800000);
+      expect(data[1].values[0].timestamp).toStrictEqual(1_577_836_800_000);
 
       expect(data[2].country).toStrictEqual('A');
       expect(data[2].state).toStrictEqual('Z');
@@ -153,7 +148,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[2].values[0].confirmed).toStrictEqual(1000);
       expect(data[2].values[0].deaths).toStrictEqual(10);
       expect(data[2].values[0].recovered).toStrictEqual(100);
-      expect(data[2].values[0].timestamp).toStrictEqual(1577836800000);
+      expect(data[2].values[0].timestamp).toStrictEqual(1_577_836_800_000);
 
       expect(data[3].country).toStrictEqual('B');
       expect(data[3].state).toStrictEqual('');
@@ -161,7 +156,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[3].values[0].confirmed).toStrictEqual(2);
       expect(data[3].values[0].deaths).toStrictEqual(2);
       expect(data[3].values[0].recovered).toStrictEqual(2);
-      expect(data[3].values[0].timestamp).toStrictEqual(1577836800000);
+      expect(data[3].values[0].timestamp).toStrictEqual(1_577_836_800_000);
     });
 
     it('missing lookup', async () => {
@@ -175,7 +170,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       const data = await collector.collect();
 
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
 
       expect(mockedFetch).toHaveBeenCalledTimes(4);
@@ -187,7 +182,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[0].values[0].confirmed).toStrictEqual(10);
       expect(data[0].values[0].deaths).toStrictEqual(1000);
       expect(data[0].values[0].recovered).toStrictEqual(100);
-      expect(data[0].values[0].timestamp).toStrictEqual(1577836800000);
+      expect(data[0].values[0].timestamp).toStrictEqual(1_577_836_800_000);
     });
 
     it('missing deaths', async () => {
@@ -201,7 +196,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       const data = await collector.collect();
 
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
 
       expect(mockedFetch).toHaveBeenCalledTimes(4);
@@ -213,7 +208,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[0].values[0].confirmed).toStrictEqual(10);
       expect(data[0].values[0].deaths).toStrictEqual(0);
       expect(data[0].values[0].recovered).toStrictEqual(100);
-      expect(data[0].values[0].timestamp).toStrictEqual(1577836800000);
+      expect(data[0].values[0].timestamp).toStrictEqual(1_577_836_800_000);
     });
 
     it('missing recovered', async () => {
@@ -226,7 +221,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       const data = await collector.collect();
 
       expect(mockedFetch.mock.calls[0][1].headers).toStrictEqual({
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'br, gzip, deflate',
       });
 
       expect(mockedFetch).toHaveBeenCalledTimes(4);
@@ -238,7 +233,7 @@ describe(`${libname} ${libversion} - collector`, () => {
       expect(data[0].values[0].confirmed).toStrictEqual(10);
       expect(data[0].values[0].deaths).toStrictEqual(100);
       expect(data[0].values[0].recovered).toStrictEqual(0);
-      expect(data[0].values[0].timestamp).toStrictEqual(1577836800000);
+      expect(data[0].values[0].timestamp).toStrictEqual(1_577_836_800_000);
     });
   });
 });

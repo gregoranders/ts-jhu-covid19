@@ -1,6 +1,11 @@
 dist/
+docs-tmp/
+etc/
 node_modules/
 temp/
 test/
 
 package-lock.json
+
+*.js
+*.js.map

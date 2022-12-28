@@ -23,9 +23,13 @@
     "pretty": true,
     "preserveConstEnums": true,
     "removeComments": false,
-    "sourceMap": false,
-    "inlineSourceMap": true,
-    "inlineSources": true
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "declarationMap": true,
+    "outDir": "./dist"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["lib", "node_modules", "src/**/*.spec.ts"]

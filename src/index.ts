@@ -5,7 +5,6 @@
  *
  * @packageDocumentation
  */
-import { default as Provider } from './provider';
 
 /**
  * library name
@@ -21,7 +20,7 @@ export const libname = '@gregoranders/jhu-covid19';
  * @public
  * @readonly
  */
-export const libversion = '0.0.8';
+export const libversion = '0.0.9';
 
 /**
  * library homepage
@@ -45,9 +44,9 @@ export {
   MetricValueType,
   Model,
   Provider,
+  default,
 } from './provider';
 
 /**
  * @public
  */
-export default Provider;
