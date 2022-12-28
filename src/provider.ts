@@ -304,14 +304,14 @@ export class ModelProcessor {
   }
 
   private _diff(value: RowModelValue, index: number, all: RowModelValue[]): MetricValue {
-    return !index
-      ? { ...DEFAULT_METRIC_VALUE }
-      : {
+    return index
+      ? {
           confirmed: value.confirmed - all[index - 1].confirmed,
           dead: value.deaths - all[index - 1].deaths,
           recovered: value.recovered - all[index - 1].recovered,
           active: this._active(value) - this._active(all[index - 1]),
-        };
+        }
+      : { ...DEFAULT_METRIC_VALUE };
   }
 
   private _averages(values: RowModelValue[], index: number): MetricValueAvrg {

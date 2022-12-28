@@ -29,11 +29,11 @@ export interface MetricValueAvrg extends Record<MetricValueAvrgType, MetricValue
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  ["14"](./jhu-covid19.metricvalueavrg._14_.md) | [MetricValue](./jhu-covid19.metricvalue.md) | 17 days average |
-|  ["21"](./jhu-covid19.metricvalueavrg._21_.md) | [MetricValue](./jhu-covid19.metricvalue.md) | 21 days average |
-|  ["28"](./jhu-covid19.metricvalueavrg._28_.md) | [MetricValue](./jhu-covid19.metricvalue.md) | 28 days average |
-|  ["5"](./jhu-covid19.metricvalueavrg._5_.md) | [MetricValue](./jhu-covid19.metricvalue.md) | 5 days average |
-|  ["7"](./jhu-covid19.metricvalueavrg._7_.md) | [MetricValue](./jhu-covid19.metricvalue.md) | 7 days average |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["14"](./jhu-covid19.metricvalueavrg._14_.md) | <code>readonly</code> | [MetricValue](./jhu-covid19.metricvalue.md) | 17 days average |
+|  ["21"](./jhu-covid19.metricvalueavrg._21_.md) | <code>readonly</code> | [MetricValue](./jhu-covid19.metricvalue.md) | 21 days average |
+|  ["28"](./jhu-covid19.metricvalueavrg._28_.md) | <code>readonly</code> | [MetricValue](./jhu-covid19.metricvalue.md) | 28 days average |
+|  ["5"](./jhu-covid19.metricvalueavrg._5_.md) | <code>readonly</code> | [MetricValue](./jhu-covid19.metricvalue.md) | 5 days average |
+|  ["7"](./jhu-covid19.metricvalueavrg._7_.md) | <code>readonly</code> | [MetricValue](./jhu-covid19.metricvalue.md) | 7 days average |
 

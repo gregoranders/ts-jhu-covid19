@@ -28,10 +28,10 @@ export interface MetricValue extends Record<MetricValueType, number>
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [active](./jhu-covid19.metricvalue.active.md) | number | active cases |
-|  [confirmed](./jhu-covid19.metricvalue.confirmed.md) | number | confirmed cases |
-|  [dead](./jhu-covid19.metricvalue.dead.md) | number | deaths |
-|  [recovered](./jhu-covid19.metricvalue.recovered.md) | number | recovered cases |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [active](./jhu-covid19.metricvalue.active.md) | <code>readonly</code> | number | active cases |
+|  [confirmed](./jhu-covid19.metricvalue.confirmed.md) | <code>readonly</code> | number | confirmed cases |
+|  [dead](./jhu-covid19.metricvalue.dead.md) | <code>readonly</code> | number | deaths |
+|  [recovered](./jhu-covid19.metricvalue.recovered.md) | <code>readonly</code> | number | recovered cases |
 

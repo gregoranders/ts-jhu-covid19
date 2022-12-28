@@ -14,10 +14,10 @@ export interface Model
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [country](./jhu-covid19.model.country.md) | string | country |
-|  [metrics](./jhu-covid19.model.metrics.md) | [Metric](./jhu-covid19.metric.md)<!-- -->\[\] | series of daily mertics |
-|  [population](./jhu-covid19.model.population.md) | number | population |
-|  [state?](./jhu-covid19.model.state.md) | string \| null | <i>(Optional)</i> state/province |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [country](./jhu-covid19.model.country.md) | <code>readonly</code> | string | country |
+|  [metrics](./jhu-covid19.model.metrics.md) | <code>readonly</code> | [Metric](./jhu-covid19.metric.md)<!-- -->\[\] | series of daily mertics |
+|  [population](./jhu-covid19.model.population.md) | <code>readonly</code> | number | population |
+|  [state?](./jhu-covid19.model.state.md) | <code>readonly</code> | string \| null | <i>(Optional)</i> state/province |
 

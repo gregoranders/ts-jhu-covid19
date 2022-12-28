@@ -9,7 +9,7 @@ metric value type
 <b>Signature:</b>
 
 ```typescript
-export declare type MetricValueType = 'confirmed' | 'dead' | 'recovered' | 'active';
+export type MetricValueType = 'confirmed' | 'dead' | 'recovered' | 'active';
 ```
 
 ## Example

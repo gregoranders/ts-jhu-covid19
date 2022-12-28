@@ -9,7 +9,7 @@ fetch like interface result
 <b>Signature:</b>
 
 ```typescript
-export declare type FetchLikeResult = {
+export type FetchLikeResult = {
     text(): Promise<string>;
 };
 ```

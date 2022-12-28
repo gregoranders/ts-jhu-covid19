@@ -33,7 +33,7 @@
 - Code Quality via [Code Climate](./docs/codeclimate.md) and [Codacy](./docs/codacy.md)
 
 | GitHub                                                           | Coveralls                                                                  |                                                                              |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| :--------------------------------------------------------------- | :------------------------------------------------------------------------- | :--------------------------------------------------------------------------- |
 | [![Release Build][release-image]][release-url]                   |                                                                            | [![npm][npm-image]][npm-url]                                                 |
 | [![Master Build][master-build-image]][master-url]                | [![Master Coverage][master-coveralls-image]][master-coveralls-url]         | [![Master Version][master-version-image]][master-version-url]                |
 | [![Development Build][development-build-image]][development-url] | [![Test Coverage][development-coveralls-image]][development-coveralls-url] | [![Development Version][development-version-image]][development-version-url] |
@@ -99,7 +99,6 @@ npm run clear
 [release-url]: https://github.com/gregoranders/ts-jhu-covid19/releases
 [master-url]: https://github.com/gregoranders/ts-jhu-covid19/tree/master
 [development-url]: https://github.com/gregoranders/ts-jhu-covid19/tree/development
-[repository-url]: https://github.com/gregoranders/ts-jhu-covid19
 [code-metric-url]: https://github.com/gregoranders/ts-jhu-covid19/search?l=TypeScript
 [license-url]: https://github.com/gregoranders/ts-jhu-covid19/blob/master/LICENSE
 [license-image]: https://img.shields.io/github/license/gregoranders/ts-jhu-covid19.svg
@@ -109,7 +108,6 @@ npm run clear
 [development-version-image]: https://img.shields.io/github/package-json/v/gregoranders/ts-jhu-covid19/development
 [issues-url]: https://github.com/gregoranders/ts-jhu-covid19/issues
 [issues-image]: https://img.shields.io/github/issues-raw/gregoranders/ts-jhu-covid19.svg
-[release-build-image]: https://github.com/gregoranders/ts-jhu-covid19/workflows/Release%20CI/badge.svg
 [master-build-image]: https://github.com/gregoranders/ts-jhu-covid19/workflows/Master%20CI/badge.svg
 [development-build-image]: https://github.com/gregoranders/ts-jhu-covid19/workflows/Development%20CI/badge.svg
 [master-coveralls-url]: https://coveralls.io/github/gregoranders/ts-jhu-covid19?branch=master
@@ -128,7 +126,6 @@ npm run clear
 [node-image]: https://img.shields.io/node/v/@gregoranders/jhu-covid19
 [npm-types-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
 [npm-types-image]: https://img.shields.io/npm/types/@gregoranders/jhu-covid19
-[release-url]: https://www.npmjs.com/package/@gregoranders/jhu-covid19
 [release-image]: https://img.shields.io/github/release/gregoranders/ts-jhu-covid19
 [language-image]: https://img.shields.io/github/languages/top/gregoranders/ts-csv
 [languages-image]: https://img.shields.io/github/languages/count/gregoranders/ts-csv

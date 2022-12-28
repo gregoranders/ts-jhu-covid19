@@ -9,17 +9,22 @@ const resolved = (text: string) =>
 const mockFetch = (lookup: string, confirmed: string, deaths: string, recovered: string) =>
   jest.fn().mockImplementation((url: string) => {
     switch (url) {
-      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv':
+      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv': {
         return resolved(lookup);
-      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv':
+      }
+      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv': {
         return resolved(confirmed);
-      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv':
+      }
+      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv': {
         return resolved(deaths);
-      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv':
+      }
+      case 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv': {
         return resolved(recovered);
-      default:
+      }
+      default: {
         console.error(url);
         return { text: () => Promise.reject(url) };
+      }
     }
   });
 

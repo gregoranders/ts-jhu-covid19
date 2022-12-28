@@ -9,7 +9,7 @@ fetch like interface options
 <b>Signature:</b>
 
 ```typescript
-export declare type FetchLikeOptions = {
+export type FetchLikeOptions = {
     headers: Record<string, string>;
     method: 'GET';
 };

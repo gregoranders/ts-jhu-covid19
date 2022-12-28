@@ -9,7 +9,7 @@ precalculated average type - in days
 <b>Signature:</b>
 
 ```typescript
-export declare type MetricValueAvrgType = 5 | 7 | 14 | 21 | 28;
+export type MetricValueAvrgType = 5 | 7 | 14 | 21 | 28;
 ```
 
 ## Example
