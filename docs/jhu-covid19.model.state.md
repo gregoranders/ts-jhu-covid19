@@ -6,7 +6,7 @@
 
 state/province
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 state?: string | null;

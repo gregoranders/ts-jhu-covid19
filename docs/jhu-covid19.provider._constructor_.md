@@ -6,7 +6,7 @@
 
 constructor
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(_fetch: FetchLike);

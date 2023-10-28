@@ -6,7 +6,7 @@
 
 data provider
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class Provider 

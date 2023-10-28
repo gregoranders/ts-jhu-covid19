@@ -6,7 +6,7 @@
 
 fetch like interface options
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type FetchLikeOptions = {

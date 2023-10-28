@@ -6,7 +6,7 @@
 
 series of daily mertics
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 metrics: Metric[];

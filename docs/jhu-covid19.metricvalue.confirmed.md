@@ -6,7 +6,7 @@
 
 confirmed cases
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 confirmed: number;

@@ -6,7 +6,7 @@
 
 population
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 population: number;

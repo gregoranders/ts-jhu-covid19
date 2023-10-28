@@ -6,10 +6,10 @@
 
 fetch like interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type FetchLike = (url: string, options?: FetchLikeOptions) => Promise<FetchLikeResult>;
 ```
-<b>References:</b> [FetchLikeOptions](./jhu-covid19.fetchlikeoptions.md)<!-- -->, [FetchLikeResult](./jhu-covid19.fetchlikeresult.md)
+**References:** [FetchLikeOptions](./jhu-covid19.fetchlikeoptions.md)<!-- -->, [FetchLikeResult](./jhu-covid19.fetchlikeresult.md)
 

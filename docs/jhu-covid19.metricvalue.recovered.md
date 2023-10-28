@@ -6,7 +6,7 @@
 
 recovered cases
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 recovered: number;

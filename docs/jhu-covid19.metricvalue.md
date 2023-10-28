@@ -6,12 +6,12 @@
 
 metric value
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MetricValue extends Record<MetricValueType, number> 
 ```
-<b>Extends:</b> Record&lt;[MetricValueType](./jhu-covid19.metricvaluetype.md)<!-- -->, number&gt;
+**Extends:** Record&lt;[MetricValueType](./jhu-covid19.metricvaluetype.md)<!-- -->, number&gt;
 
 ## Example
 

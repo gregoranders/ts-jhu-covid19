@@ -6,7 +6,7 @@
 
 difference to day before
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 diff: MetricValue;

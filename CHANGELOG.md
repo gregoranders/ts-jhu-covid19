@@ -1,3 +1,5 @@
+## [0.0.10](https://github.com/gregoranders/ts-jhu-covid19/compare/v0.0.9...v0.0.10) (2023-10-28)
+
 #### 0.0.8 (2020-06-28)
 
 ##### Build System / Dependencies
