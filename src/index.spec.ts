@@ -7,7 +7,7 @@ describe(`${TestSubject.libname} ${TestSubject.libversion}`, () => {
     });
 
     it('libversion', () => {
-      expect(TestSubject.libversion).toBe('0.0.9');
+      expect(TestSubject.libversion).toBe('0.0.11');
     });
 
     it('liburl', () => {

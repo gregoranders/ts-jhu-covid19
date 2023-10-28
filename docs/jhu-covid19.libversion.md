@@ -9,5 +9,5 @@ library version
 **Signature:**
 
 ```typescript
-libversion = "0.0.9"
+libversion = "0.0.11"
 ```
