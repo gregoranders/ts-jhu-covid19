@@ -6,12 +6,12 @@
 
 daily metric
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Metric extends MetricValue 
 ```
-<b>Extends:</b> [MetricValue](./jhu-covid19.metricvalue.md)
+**Extends:** [MetricValue](./jhu-covid19.metricvalue.md)
 
 ## Properties
 

@@ -6,7 +6,7 @@
 
 precalculated average type - in days
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type MetricValueAvrgType = 5 | 7 | 14 | 21 | 28;

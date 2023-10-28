@@ -6,7 +6,7 @@
 
 country
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 country: string;

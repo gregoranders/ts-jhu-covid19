@@ -6,7 +6,7 @@
 
 21 days average
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 21: MetricValue;

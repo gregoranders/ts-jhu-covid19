@@ -6,12 +6,12 @@
 
 Fetches the JHU datset, aggregates, precalculates values, diffs and averages.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get(): Promise<Model[]>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Model](./jhu-covid19.model.md)<!-- -->\[\]&gt;
 

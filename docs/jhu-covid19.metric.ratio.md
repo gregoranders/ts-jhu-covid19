@@ -6,7 +6,7 @@
 
 ratio according to population
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ratio: MetricValue & {

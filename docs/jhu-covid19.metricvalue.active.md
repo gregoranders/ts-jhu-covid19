@@ -6,7 +6,7 @@
 
 active cases
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 active: number;

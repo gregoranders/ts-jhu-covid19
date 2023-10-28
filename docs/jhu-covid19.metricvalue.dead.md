@@ -6,7 +6,7 @@
 
 deaths
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 dead: number;

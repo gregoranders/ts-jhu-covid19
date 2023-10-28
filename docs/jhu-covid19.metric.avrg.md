@@ -6,7 +6,7 @@
 
 average values
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 avrg: MetricValueAvrg;

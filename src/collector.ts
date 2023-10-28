@@ -184,7 +184,10 @@ export class ModelCollector {
   private readonly _modelMapper = new ModelMapper();
   private readonly _lookupMapper = new LookupMapper();
 
-  public constructor(private _fetchImpl: FetchLike, private _configuration = Configuration) {}
+  public constructor(
+    private _fetchImpl: FetchLike,
+    private _configuration = Configuration,
+  ) {}
 
   public async collect(): Promise<readonly RowModel[]> {
     const lookup = await this._fetchLookup();

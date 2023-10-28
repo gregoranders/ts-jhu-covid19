@@ -6,7 +6,7 @@
 
 fetch like interface result
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type FetchLikeResult = {

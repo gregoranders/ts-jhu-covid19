@@ -6,7 +6,7 @@
 
 metric value type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type MetricValueType = 'confirmed' | 'dead' | 'recovered' | 'active';

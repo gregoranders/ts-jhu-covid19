@@ -6,7 +6,7 @@
 
 UNIX UTC timestamp
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 timestamp: number;
